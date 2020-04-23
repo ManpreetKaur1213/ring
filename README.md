@@ -1,2 +1,2 @@
-PHP 7.4.4
-MySQL unknown
+PHP 7.5.4
+postgreSQL 12.2
