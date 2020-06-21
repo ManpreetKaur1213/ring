@@ -7,15 +7,6 @@
 		$location = $_GET['location'];
 		$query = http_build_query(array('term' =>$term , 'location'=>$location));
 
-/*$city_names = array(
-    'delhi',
-    'mumbai',
-    'kolkata',
-    'chennai'
-);
-$city_query = http_build_query(array('city' => $city_names),());*/
-
-
 
 	$api_url="https://api.yelp.com/v3/businesses/search?".$query;
 
