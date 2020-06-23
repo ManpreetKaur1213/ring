@@ -8,6 +8,7 @@
 		$total = 11;
 		$limit = 2;
 
+
 		if (isset($_GET['currentpage'])) {
             $currentpage = intval($_GET['currentpage']);
         } else {
@@ -22,6 +23,7 @@
 
 
 	  $api_url="https://api.yelp.com/v3/businesses/search?".$query;
+
 
       $api_secret="M-UrVIi40m-K31av-glzYU0GAW6z58ZSdDAq3FYX4npIotIofOfcsSiudwY-nnkVNERUj9DIw5nAqNqYbsMdq5gh9Wtynmd3Wyyh4KaBafxZypfWksHuST9V-0CiXnYx";
 
