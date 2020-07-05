@@ -1,12 +1,13 @@
 
+
 <?php
-  $result = NULL;
+
+    $result = NULL;
 
 	if (isset($_GET['term'], $_GET['location'])) {
 		$term = $_GET['term'];
 		$location = $_GET['location'];
-		$total = 11;
-		$limit = 2;
+		$limit = 20;
 
 
 		if (isset($_GET['currentpage'])) {
@@ -15,17 +16,16 @@
             $currentpage = 1;
         }
         
-    $offset = ($currentpage-1) * $limit;
+    $offset = ($currentpage - 1) * $limit;
         
-    $total_pages = ceil($total / $limit);
+    $query = http_build_query(array('term' =>$term , 'location'=>$location , 'offset'=>$offset,'limit' => $limit));
+
+
+	$api_url="https://api.yelp.com/v3/businesses/search?".$query;
     
-    $query = http_build_query(array('term' =>$term , 'location'=>$location , 'offset'=>$offset,'limit'=>$limit));
 
 
-	  $api_url="https://api.yelp.com/v3/businesses/search?".$query;
-
-
-      $api_secret="M-UrVIi40m-K31av-glzYU0GAW6z58ZSdDAq3FYX4npIotIofOfcsSiudwY-nnkVNERUj9DIw5nAqNqYbsMdq5gh9Wtynmd3Wyyh4KaBafxZypfWksHuST9V-0CiXnYx";
+    $api_secret=getenv('API_KEY');
 
 	$ch = curl_init();
 
@@ -35,16 +35,22 @@
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE); 
 
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , 'Authorization: bearer M-UrVIi40m-K31av-glzYU0GAW6z58ZSdDAq3FYX4npIotIofOfcsSiudwY-nnkVNERUj9DIw5nAqNqYbsMdq5gh9Wtynmd3Wyyh4KaBafxZypfWksHuST9V-0CiXnYx'));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json' , 'Authorization: bearer '.$api_secret));
 
- 		$result = curl_exec($ch);
- 		$data=json_decode($result, true);
+ 	$result = curl_exec($ch);
+        
+    
+ 	$data = json_decode($result, true);
+    $total    = $data['total'];
+    echo $total;
+
+    $total_pages = ceil($total / $limit);
  
  		for ($i=1; $i < $total_pages; $i++) { 
  			echo "<a href=/views/search.php?term=".$_GET['term']."&location=".$_GET['location']."&currentpage=".$i.">".$i."</a>";
  		};
 
- 		curl_close($ch);
+ 	curl_close($ch);
 	};
 
 ?>
