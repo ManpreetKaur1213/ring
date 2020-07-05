@@ -2,8 +2,7 @@
 
  <html>
    <?php include 'header.php' ?>
-     <?php include_once 'curl.php' ?>
-   
+   <?php include_once 'curl.php' ?>
 
    <body class="container" style="background-image: url('../assets/images/sky.jpg');background-repeat: no-repeat;background-size: cover;">
 
@@ -21,17 +20,19 @@
 
        <input type="submit" class="btn btn-primary btn-block" value="Submit"/>
      </form>
-  <?php
+     <?php
 
-    if ($result != NULL) {
 
+     if ($result != NULL) {
+
+    
     foreach($data['businesses'] as $business){
         echo $business['name']."</br>";
         echo "<img src=".$business['image_url']." />"."</br>";
-
       }
-    }
-  ?>
+     }
+
+     ?>
   
  </body>
 </html>
