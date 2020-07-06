@@ -13,7 +13,6 @@
         </div>
       </div>
       <?php
-      
           $db_connection = pg_connect("host=".getenv('DB_HOST')." dbname=".getenv('DB_NAME')." user=".getenv('DB_USERNAME'));
       ?>
   </body>
