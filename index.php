@@ -13,7 +13,9 @@
         </div>
       </div>
       <?php
-        $db_connection = pg_connect("host=localhost dbname=ring_development user=application");
+        $db_connection = pg_connect("getenv('DB_HOST') 
+          getenv('DB_NAME') 
+          getenv('DB_USERNAME')");
       ?>
   </body>
 </html>
